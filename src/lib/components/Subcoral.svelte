@@ -1,0 +1,211 @@
+<script>
+    import Header from "./Header.svelte";
+    import Coral from "$lib/svg/coral.svg";
+    import Success from "$lib/svg/success.svg";
+    import Failure from "$lib/svg/failure.svg";
+    import Undo from "$lib/svg/undo.svg";
+    export let phase = "Auto";
+    import {
+        color,
+        teamKey,
+        autoL1Success,
+        autoL1Failure,
+        autoL2Success,
+        autoL3Success,
+        autoL2Failure,
+        autoL3Failure,
+        autoL4Success,
+        autoL4Failure,
+        teleL1Success,
+        teleL1Failure,
+        teleL2Success,
+        teleL3Success,
+        teleL2Failure,
+        teleL3Failure,
+        teleL4Success,
+        teleL4Failure,
+    } from "../../stores";
+    let firstselected = 0;
+    export let incoral = true;
+    function success() {
+        if (phase == "Auto") {
+            if (firstselected == 1) {
+                $autoL1Success++;
+            } else if (firstselected == 2) {
+                $autoL2Success++;
+            } else if (firstselected == 3) {
+                $autoL3Success++;
+            } else {
+                $autoL4Success++;
+            }
+        } else {
+            if (firstselected == 1) {
+                $teleL1Success++;
+            } else if (firstselected == 2) {
+                $teleL2Success++;
+            } else if (firstselected == 3) {
+                $teleL3Success++;
+            } else {
+                $teleL4Success++;
+            }
+        }
+        incoral = false;
+        incoral = incoral;
+    }
+
+    function falilure() {
+        if (phase == "Auto") {
+            if (firstselected == 1) {
+                $autoL1Failure++;
+            } else if (firstselected == 2) {
+                $autoL2Failure++;
+            } else if (firstselected == 3) {
+                $autoL3Failure++;
+            } else {
+                $autoL4Failure++;
+            }
+        } else {
+            if (firstselected == 1) {
+                $teleL1Failure++;
+            } else if (firstselected == 2) {
+                $teleL2Failure++;
+            } else if (firstselected == 3) {
+                $teleL3Failure++;
+            } else {
+                $teleL4Failure++;
+            }
+        }
+        incoral = false;
+        incoral = incoral;
+    }
+</script>
+
+{#if firstselected == 0}
+<Header phase={phase + " (Coral)"} color={$color} team={$teamKey} />
+    <div style="height: 70vh; padding-bottom: -2rem" class="grid grid-cols-2 grid-rows-3">
+        <button
+            class="grid grid-cols-1 grid-rows-2"
+            on:click={(firstselected = 1)}
+        >
+            <center>
+                <img src={Coral} alt="" />
+                <h1 class="self-center">L1</h1>
+            </center>
+        </button>
+        <button
+            class="grid grid-cols-1 grid-rows-2"
+            on:click={(firstselected = 2)}
+        >
+            <center>
+                <img src={Coral} alt="" />
+                <h1 class="self-center">L2</h1>
+            </center>
+        </button>
+        <button
+            class="grid grid-cols-1 grid-rows-2"
+            on:click={(firstselected = 3)}
+        >
+            <center>
+                <img src={Coral} alt="" />
+                <h1 class="self-center">L3</h1>
+            </center>
+        </button>
+        <button
+            class="grid grid-cols-1 grid-rows-2"
+            on:click={(firstselected = 4)}
+        >
+            <center>
+                <img src={Coral} alt="" />
+                <h1 class="self-center">L4</h1>
+            </center>
+        </button>
+        <button
+            style="margin-left: 1rem"
+            class="nothingg col-span-2"
+            on:click={(incoral = false)}
+        >
+        <svg viewBox="0 0 365 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_d_1_150)">
+            <rect x="4" width="357" height="150" rx="10" fill="lightgray"/>
+            <path d="M154.009 107.625V118.7C154.009 120.017 154.351 121.008 155.034 121.675C155.734 122.342 156.701 122.675 157.934 122.675C159.184 122.675 160.151 122.342 160.834 121.675C161.534 121.008 161.884 120.017 161.884 118.7V107.625H164.734V118.65C164.734 120.067 164.426 121.267 163.809 122.25C163.192 123.233 162.367 123.967 161.334 124.45C160.301 124.933 159.159 125.175 157.909 125.175C156.659 125.175 155.517 124.933 154.484 124.45C153.467 123.967 152.659 123.233 152.059 122.25C151.459 121.267 151.159 120.067 151.159 118.65V107.625H154.009ZM175.395 111C176.478 111 177.445 111.225 178.295 111.675C179.161 112.125 179.836 112.792 180.32 113.675C180.803 114.558 181.045 115.625 181.045 116.875V125H178.22V117.3C178.22 116.067 177.911 115.125 177.295 114.475C176.678 113.808 175.836 113.475 174.77 113.475C173.703 113.475 172.853 113.808 172.22 114.475C171.603 115.125 171.295 116.067 171.295 117.3V125H168.445V111.225H171.295V112.8C171.761 112.233 172.353 111.792 173.07 111.475C173.803 111.158 174.578 111 175.395 111ZM183.73 118.05C183.73 116.667 184.014 115.442 184.58 114.375C185.164 113.308 185.947 112.483 186.93 111.9C187.93 111.3 189.039 111 190.255 111C191.155 111 192.039 111.2 192.905 111.6C193.789 111.983 194.489 112.5 195.005 113.15V106.5H197.88V125H195.005V122.925C194.539 123.592 193.889 124.142 193.055 124.575C192.239 125.008 191.297 125.225 190.23 125.225C189.03 125.225 187.93 124.925 186.93 124.325C185.947 123.708 185.164 122.858 184.58 121.775C184.014 120.675 183.73 119.433 183.73 118.05ZM195.005 118.1C195.005 117.15 194.805 116.325 194.405 115.625C194.022 114.925 193.514 114.392 192.88 114.025C192.247 113.658 191.564 113.475 190.83 113.475C190.097 113.475 189.414 113.658 188.78 114.025C188.147 114.375 187.63 114.9 187.23 115.6C186.847 116.283 186.655 117.1 186.655 118.05C186.655 119 186.847 119.833 187.23 120.55C187.63 121.267 188.147 121.817 188.78 122.2C189.43 122.567 190.114 122.75 190.83 122.75C191.564 122.75 192.247 122.567 192.88 122.2C193.514 121.833 194.022 121.3 194.405 120.6C194.805 119.883 195.005 119.05 195.005 118.1ZM207.599 125.225C206.299 125.225 205.124 124.933 204.074 124.35C203.024 123.75 202.199 122.917 201.599 121.85C200.999 120.767 200.699 119.517 200.699 118.1C200.699 116.7 201.007 115.458 201.624 114.375C202.24 113.292 203.082 112.458 204.149 111.875C205.215 111.292 206.407 111 207.724 111C209.04 111 210.232 111.292 211.299 111.875C212.365 112.458 213.207 113.292 213.824 114.375C214.44 115.458 214.749 116.7 214.749 118.1C214.749 119.5 214.432 120.742 213.799 121.825C213.165 122.908 212.299 123.75 211.199 124.35C210.115 124.933 208.915 125.225 207.599 125.225ZM207.599 122.75C208.332 122.75 209.015 122.575 209.649 122.225C210.299 121.875 210.824 121.35 211.224 120.65C211.624 119.95 211.824 119.1 211.824 118.1C211.824 117.1 211.632 116.258 211.249 115.575C210.865 114.875 210.357 114.35 209.724 114C209.09 113.65 208.407 113.475 207.674 113.475C206.94 113.475 206.257 113.65 205.624 114C205.007 114.35 204.515 114.875 204.149 115.575C203.782 116.258 203.599 117.1 203.599 118.1C203.599 119.583 203.974 120.733 204.724 121.55C205.49 122.35 206.449 122.75 207.599 122.75Z" fill="#333"/>
+            </g>
+            <path d="M184.709 32.4444C167.62 32.4444 152.144 38.8244 140.214 49.2L117 26V84H175.036L151.693 60.6711C160.656 53.1956 172.07 48.5556 184.709 48.5556C207.536 48.5556 226.946 63.4422 233.717 84L249 78.9733C240.037 51.9711 214.694 32.4444 184.709 32.4444Z" fill="#333"/>
+            <defs>
+            <filter id="filter0_d_1_150" x="0" y="0" width="365" height="152" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="2"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_150"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_150" result="shape"/>
+            </filter>
+            </defs>
+            </svg>
+            
+        </button>
+    </div>
+{:else}
+{#if firstselected == 1}
+<Header phase={phase + " (L1)"} color={$color} team={$teamKey} />
+{:else if firstselected == 2}
+<Header phase={phase + " (L2)"} color={$color} team={$teamKey} />
+{:else if firstselected == 3}
+<Header phase={phase + " (L3)"} color={$color} team={$teamKey} />
+{:else}
+<Header phase={phase + " (L4)"} color={$color} team={$teamKey} />
+{/if}
+<div class="grid grid-cols-2 grid-rows-1 justify-items-center gap-4">
+        <button class="nothing" on:click={success}>
+            <img
+                style="margin-left: 1rem; margin-top: 1rem"
+                src={Success}
+                alt="Success"
+            />
+        </button>
+        <button class="nothing" on:click={falilure}>
+            <img
+                style="margin-right: 1rem; margin-top: 1rem"
+                src={Failure}
+                alt=""
+            />
+        </button>
+        <button class="nothing col-span-2" on:click={(firstselected = 0)}>
+            <img
+                style="margin-left: 1rem; margin-right: 1rem"
+                src={Undo}
+                alt=""
+            />
+        </button>
+    </div>
+{/if}
+
+<style>
+    button {
+        background-color: lightgray;
+        border: none;
+        padding: 1.5rem;
+    }
+    div {
+        padding: 0rem;
+    }
+    .nothing {
+        background-color: transparent;
+        border: none;
+        margin: 0rem;
+        padding: 0rem;
+        width: 100%;
+    }
+    h1 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+    .nothingg {
+        background-color: transparent;
+        border: none;
+        margin: 0rem;
+        padding: 0rem;
+        width: calc(100% - 2rem);
+    }
+</style>
