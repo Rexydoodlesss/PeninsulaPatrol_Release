@@ -1,5 +1,5 @@
 # Peninsula Patrol
-### Scouting App for FRC6036 — 2025 Reefscape Season  
+### Scouting App for FRC6036 2025 Reefscape Season  
 
 PeninsulaPatrol was the scouting system used by FRC6036 for the 2025 Reefscape season. It was a mobile PWA that featured a dynamic queuing system to assign robots to different scouts.
 
@@ -17,9 +17,9 @@ PeninsulaPatrol was the scouting system used by FRC6036 for the 2025 Reefscape s
 ---
 
 
-## 👤 Credits
+## Credits
 
-- **FRC6036 – Peninsula Robotics**  
+- **FRC6036 Peninsula Robotics**  
 - Rex Huang
 - Open-source libraries that made this project possible
 
